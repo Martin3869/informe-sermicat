@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Informe SERMICAT – Exportaciones & Análisis del Litio</title>
+  <!-- Viewport: permite zoom en celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      margin: 0;
+      padding: 8px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 18px;
+      margin: 6px 0;
+    }
+    /* Gráficos */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .chart-container {
+      background: #2c2c2c;
+      padding: 6px;
+      border-radius: 6px;
+    }
+    h2 {
+      font-size: 11px;
+      margin: 4px 0;
+      text-align: center;
+    }
+    canvas {
+      max-height: 140px;
+    }
+    /* Bloque de análisis */
+    .summary-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .box {
+      background: #2c2c2c;
+      padding: 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      line-height: 1.4;
+      text-align: left;
+    }
+    .box h3 {
+      font-size: 13px;
+      text-align: center;
+      margin: 2px 0 6px 0;
+      color: #4CAF50;
+    }
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: repeat(2, 1fr); } /* 2x2 en celular */
+      canvas { max-height: 120px; }
+      .box { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Informe elaborado por DANIEL MARTÍN CONTRERAS (3813012805) – 
+    <a href="https://sermicat.com" target="_blank"><b>SERMICAT</b></a>
+  </h1>
+  <h1>Exportaciones NOA & Análisis del Litio (2025)</h1>
+
+  <!-- Gráficos -->
+  <div class="grid">
+    <div class="chart-container"><h2>Jujuy vs Catamarca</h2><canvas id="generalChart"></canvas></div>
+    <div class="chart-container"><h2>Jujuy</h2><canvas id="jujuyChart"></canvas></div>
+    <div class="chart-container"><h2>Catamarca</h2><canvas id="catamarcaChart"></canvas></div>
+    <div class="chart-container"><h2>Minería</h2><canvas id="mineriaChart"></canvas></div>
+  </div>
+
+  <!-- Bloque de análisis -->
+  <div class="summary-stack">
+    <div class="box">
+      <h3>Análisis Profundo del Litio</h3>
+      • El Triángulo del Litio concentra más del <b>85 % de las reservas globales</b>. Argentina posee el <b>32 % de las sudamericanas</b> y es el 4.º productor mundial (2023).<br><br>
+      • Producción 2024: <b>74.600 toneladas LCE</b>, con un crecimiento del <b>+62 %</b> interanual.<br>
+      • Proyección 2025: <b>130.800 toneladas LCE</b>, un <b>+75 %</b> sobre 2024.<br><br>
+      • Precios: el carbonato de litio cayó casi un <b>90 %</b> desde su pico en 2023.<br>
+      • Costos: entre <b>US$ 4.000–6.000 por tonelada</b>; precios spot actuales: <b>US$ 15.000–20.000</b> → márgenes operativos estimados: <b>50–60 %</b>.<br><br>
+      • Demanda: el <b>65 %</b> impulsada por electromovilidad.<br>
+      • China concentra casi el <b>70 %</b> del consumo mundial (y más del 90 % en baterías).<br><br>
+      • Inversiones: US$ 1.600 M en 2025 y hasta US$ 17.900 M proyectados para 2026-2028.<br>
+      • Capacidad esperada: <b>450.000 toneladas anuales</b> hacia 2030.<br><br>
+      • Riesgos: precios a la baja, sobreoferta global, tensiones geopolíticas (China–EE.UU.), “paradiplomacia” provincial.<br>
+      • Oportunidad: integración minería + tecnología EDL (Extracción Directa de Litio), mayor sustentabilidad y eficiencia.<br><br>
+      <b>Fuentes:</b> 
+      <a href="https://es.wikipedia.org/wiki/Tri%C3%A1ngulo_del_Litio" target="_blank">Wikipedia</a> • 
+      <a href="https://www.reuters.com/latam/negocio/MQ4KZCYLY5OOXO54TPKWOAARYE-2025-04-08/" target="_blank">Reuters</a> • 
+      <a href="https://www.argentina.gob.ar/sites/default/files/informe_litio_junio_2025.pdf" target="_blank">Informe oficial 2025</a> • 
+      <a href="https://cenit.unsam.edu.ar/wp-content/uploads/DT-CENIT-1-2024_Litio-argentino-oportunidades-tecnologias-y-politicas-para-desarrollar-su-cadena-de-valor..pdf" target="_blank">CENIT UNSAM</a> • 
+      <a href="https://www.bbvacib.com/insights/news/energy-transition-in-argentina-challenges-and-opportunities-on-the-road-to-a-sustainable-future/" target="_blank">BBVA CIB</a> • 
+      <a href="https://elpais.com/economia/negocios/2025-08-30/el-mapa-minero-mundial-se-redibuja-al-son-geopolitico-este-es-el-punado-de-empresas-que-lo-domina.html" target="_blank">El País</a> • 
+      <a href="https://www.scielo.cl/scielo.php?lng=pt&nrm=iso&pid=S0719-09482023000100210&script=sci_arttext&tlng=pt" target="_blank">Scielo</a>
+    </div>
+  </div>
+
+  <!-- Script de gráficos -->
+  <script>
+    const commonOptions = {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#f1f1f1', font: { size: 9 } } },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const value = context.raw;
+              return `${context.label}: US$ ${value} M (${((value / total) * 100).toFixed(1)}%)`;
+            }
+          }
+        }
+      }
+    };
+
+    const data = {
+      general: [487, 187],
+      jujuy: [242, 245],
+      catamarca: [125, 62],
+      mineria: [400, 187]
+    };
+
+    new Chart(document.getElementById('generalChart'), {
+      type: 'pie',
+      data: { labels: ['Jujuy (487 M)', 'Catamarca (187 M)'], datasets: [{ data: data.general, backgroundColor: ['#4CAF50','#2196F3'] }] },
+      options: commonOptions
+    });
+    new Chart(document.getElementById('jujuyChart'), {
+      type: 'pie',
+      data: { labels: ['Litio (242 M)', 'Azúcar (245 M)'], datasets: [{ data: data.jujuy, backgroundColor: ['#FFC107','#FF5722'] }] },
+      options: commonOptions
+    });
+    new Chart(document.getElementById('catamarcaChart'), {
+      type: 'pie',
+      data: { labels: ['Litio (125 M)', 'Oro/Plata (62 M)'], datasets: [{ data: data.catamarca, backgroundColor: ['#9C27B0','#00BCD4'] }] },
+      options: commonOptions
+    });
+    new Chart(document.getElementById('mineriaChart'), {
+      type: 'pie',
+      data: { labels: ['Jujuy minería (≈400 M)', 'Catamarca minería (187 M)'], datasets: [{ data: data.mineria, backgroundColor: ['#8BC34A','#FF9800'] }] },
+      options: commonOptions
+    });
+  </script>
+</body>
+</html>
