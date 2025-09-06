@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Exportaciones NOA & Triángulo del Litio – 2025</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      margin: 0;
+      padding: 15px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+    .charts-row {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      margin-bottom: 15px;
+    }
+    .chart-container {
+      width: 23%;
+      background: #2c2c2c;
+      padding: 8px;
+      border-radius: 8px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+    h2 {
+      font-size: 12px;
+      margin: 5px 0;
+    }
+    canvas {
+      max-height: 180px;
+    }
+    .summary {
+      background: #2c2c2c;
+      padding: 10px;
+      border-radius: 8px;
+      max-width: 95%;
+      margin: auto;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+    .footer {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 11px;
+      color: #bbb;
+    }
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Exportaciones NOA & Triángulo del Litio – Primer Semestre 2025</h1>
+
+  <div class="charts-row">
+    <div class="chart-container">
+      <h2>Jujuy vs Catamarca</h2>
+      <canvas id="generalChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h2>Jujuy</h2>
+      <canvas id="jujuyChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h2>Catamarca</h2>
+      <canvas id="catamarcaChart"></canvas>
+    </div>
+    <div class="chart-container">
+      <h2>Minería (Litio + Metales)</h2>
+      <canvas id="mineriaChart"></canvas>
+    </div>
+  </div>
+
+  <div class="summary">
+    <p>
+      El <strong>Triángulo del Litio</strong> (Argentina, Bolivia y Chile) concentra hasta el <strong>85 % de las reservas mundiales</strong> de este mineral estratégico.
+      En Argentina, <strong>Jujuy y Catamarca</strong> lideran gracias a proyectos como <em>Cauchari-Olaroz</em> (Jujuy) y <em>Fénix</em> (Catamarca).
+    </p>
+    <p>
+      En 2025 se proyecta producir <strong>130.800 toneladas LCE</strong> (75 % más que en 2024). Hacia 2030 las exportaciones podrían superar los 
+      <strong>US$ 8.700 millones</strong>, y entre 2032–2035 llegar a más de <strong>US$ 11.300 millones</strong>.
+    </p>
+    <p>
+      Estas perspectivas se apoyan en <strong>inversiones internacionales</strong> y políticas como el <em>Régimen RIGI</em>. 
+      También avanza la <strong>Extracción Directa de Litio</strong>, impulsada por Y-TEC e innovaciones sostenibles.
+    </p>
+    <p>
+      <strong>Referencias rápidas:</strong> 
+      <a href="https://es.wikipedia.org/wiki/Tri%C3%A1ngulo_del_Litio" target="_blank">Wikipedia</a> • 
+      <a href="https://www.reuters.com/latam/negocio/MQ4KZCYLY5OOXO54TPKWOAARYE-2025-04-08/" target="_blank">Reuters</a> • 
+      <a href="https://www.argentina.gob.ar/sites/default/files/informe_litio_junio_2025.pdf" target="_blank">Informe oficial 2025</a>
+    </p>
+  </div>
+
+  <div class="footer">
+    Elaborado por <strong>DANIEL MARTIN CONTRERAS</strong> (3813012805) para 
+    <a href="https://sermicat.com" target="_blank"><strong>SERMICAT</strong></a>
+  </div>
+
+  <script>
+    const commonOptions = {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#f1f1f1', font: { size: 10 } } },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const value = context.raw;
+              return `${context.label}: US$ ${value} M (${((value / total) * 100).toFixed(1)}%)`;
+            }
+          }
+        }
+      }
+    };
+
+    // Datos
+    const data = {
+      general: [487, 187],
+      jujuy: [242, 245],
+      catamarca: [125, 62],
+      mineria: [400, 187]
+    };
+
+    // Crear gráficos
+    new Chart(document.getElementById('generalChart'), {
+      type: 'pie',
+      data: { labels: ['Jujuy (487 M)', 'Catamarca (187 M)'], datasets: [{ data: data.general, backgroundColor: ['#4CAF50','#2196F3'] }] },
+      options: commonOptions
+    });
+    new Chart(document.getElementById('jujuyChart'), {
+      type: 'pie',
+      data: { labels: ['Litio (242 M)', 'Azúcar (245 M)'], datasets: [{ data: data.jujuy, backgroundColor: ['#FFC107','#FF5722'] }] },
+      options: commonOptions
+    });
+    new Chart(document.getElementById('catamarcaChart'), {
+      type: 'pie',
+      data: { labels: ['Litio (125 M)', 'Oro/Plata (62 M)'], datasets: [{ data: data.catamarca, backgroundColor: ['#9C27B0','#00BCD4'] }] },
+      options: commonOptions
+    });
+    new Chart(document.getElementById('mineriaChart'), {
+      type: 'pie',
+      data: { labels: ['Jujuy minería (≈400 M)', 'Catamarca minería (187 M)'], datasets: [{ data: data.mineria, backgroundColor: ['#8BC34A','#FF9800'] }] },
+      options: commonOptions
+    });
+  </script>
+</body>
+</html>
