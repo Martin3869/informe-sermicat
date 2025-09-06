@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Exportaciones NOA & Triángulo del Litio – 2025</title>
+  <title>Informe SERMICAT – Exportaciones & Energía</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -10,47 +10,48 @@
       background-color: #1e1e1e;
       color: #f1f1f1;
       margin: 0;
-      padding: 15px;
+      padding: 8px;
     }
     h1 {
       text-align: center;
-      margin-bottom: 15px;
-      font-size: 20px;
+      font-size: 18px;
+      margin: 6px 0;
     }
-    .charts-row {
-      display: flex;
-      justify-content: space-around;
-      align-items: flex-start;
-      flex-wrap: nowrap;
-      margin-bottom: 15px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
     }
     .chart-container {
-      width: 23%;
       background: #2c2c2c;
-      padding: 8px;
-      border-radius: 8px;
-      box-shadow: 0 0 6px rgba(0,0,0,0.6);
+      padding: 6px;
+      border-radius: 6px;
     }
     h2 {
-      font-size: 12px;
-      margin: 5px 0;
+      font-size: 11px;
+      margin: 4px 0;
+      text-align: center;
     }
     canvas {
-      max-height: 180px;
+      max-height: 140px;
     }
-    .summary {
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .box {
       background: #2c2c2c;
-      padding: 10px;
-      border-radius: 8px;
-      max-width: 95%;
-      margin: auto;
-      font-size: 12px;
-      line-height: 1.4;
+      padding: 6px;
+      border-radius: 6px;
+      font-size: 11px;
+      line-height: 1.3;
     }
     .footer {
-      margin-top: 12px;
       text-align: center;
-      font-size: 11px;
+      margin-top: 4px;
+      font-size: 10px;
       color: #bbb;
     }
     a {
@@ -60,61 +61,73 @@
     a:hover {
       text-decoration: underline;
     }
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .summary-grid { grid-template-columns: 1fr; }
+      canvas { max-height: 120px; }
+    }
   </style>
 </head>
 <body>
-  <h1>Exportaciones NOA & Triángulo del Litio – Primer Semestre 2025</h1>
+  <h1>Informe SERMICAT – Exportaciones NOA & Energía Sustentable (2025)</h1>
 
-  <div class="charts-row">
-    <div class="chart-container">
-      <h2>Jujuy vs Catamarca</h2>
-      <canvas id="generalChart"></canvas>
-    </div>
-    <div class="chart-container">
-      <h2>Jujuy</h2>
-      <canvas id="jujuyChart"></canvas>
-    </div>
-    <div class="chart-container">
-      <h2>Catamarca</h2>
-      <canvas id="catamarcaChart"></canvas>
-    </div>
-    <div class="chart-container">
-      <h2>Minería (Litio + Metales)</h2>
-      <canvas id="mineriaChart"></canvas>
-    </div>
+  <!-- Gráficos -->
+  <div class="grid">
+    <div class="chart-container"><h2>Jujuy vs Catamarca</h2><canvas id="generalChart"></canvas></div>
+    <div class="chart-container"><h2>Jujuy</h2><canvas id="jujuyChart"></canvas></div>
+    <div class="chart-container"><h2>Catamarca</h2><canvas id="catamarcaChart"></canvas></div>
+    <div class="chart-container"><h2>Minería</h2><canvas id="mineriaChart"></canvas></div>
   </div>
 
-  <div class="summary">
-    <p>
-      El <strong>Triángulo del Litio</strong> (Argentina, Bolivia y Chile) concentra hasta el <strong>85 % de las reservas mundiales</strong> de este mineral estratégico.
-      En Argentina, <strong>Jujuy y Catamarca</strong> lideran gracias a proyectos como <em>Cauchari-Olaroz</em> (Jujuy) y <em>Fénix</em> (Catamarca).
-    </p>
-    <p>
-      En 2025 se proyecta producir <strong>130.800 toneladas LCE</strong> (75 % más que en 2024). Hacia 2030 las exportaciones podrían superar los 
-      <strong>US$ 8.700 millones</strong>, y entre 2032–2035 llegar a más de <strong>US$ 11.300 millones</strong>.
-    </p>
-    <p>
-      Estas perspectivas se apoyan en <strong>inversiones internacionales</strong> y políticas como el <em>Régimen RIGI</em>. 
-      También avanza la <strong>Extracción Directa de Litio</strong>, impulsada por Y-TEC e innovaciones sostenibles.
-    </p>
-    <p>
-      <strong>Referencias rápidas:</strong> 
+  <!-- Resúmenes -->
+  <div class="summary-grid">
+    <div class="box">
+      <strong>Triángulo del Litio</strong><br>
+      • Concentra 50–85% de reservas globales.<br>
+      • Jujuy y Catamarca: líderes regionales.<br>
+      • Producción 2025: 130.800 Tn LCE (+75%).<br>
+      • Exportaciones 2030: +US$ 8.700M.<br>
+      • 2032–35: +US$ 11.300M.<br>
       <a href="https://es.wikipedia.org/wiki/Tri%C3%A1ngulo_del_Litio" target="_blank">Wikipedia</a> • 
-      <a href="https://www.reuters.com/latam/negocio/MQ4KZCYLY5OOXO54TPKWOAARYE-2025-04-08/" target="_blank">Reuters</a> • 
-      <a href="https://www.argentina.gob.ar/sites/default/files/informe_litio_junio_2025.pdf" target="_blank">Informe oficial 2025</a>
-    </p>
+      <a href="https://www.argentina.gob.ar/sites/default/files/informe_litio_junio_2025.pdf" target="_blank">Informe 2025</a> • 
+      <a href="https://cancilleria.gob.ar/userfiles/ut/2024-10-la_mineria_de_litio_en_la_argentina_0.pdf" target="_blank">Cancillería</a> • 
+      <a href="https://www.reuters.com/latam/negocio/MQ4KZCYLY5OOXO54TPKWOAARYE-2025-04-08/" target="_blank">Reuters</a>
+    </div>
+    <div class="box">
+      <strong>Diversificación Energética</strong><br>
+      • EESS: paneles solares → ahorro eléctrico.<br>
+      • Baterías → autonomía en cortes.<br>
+      • Termotanques solares → agua caliente.<br>
+      • Casos: YPF Solar, Parque Cauchari (300MW).<br>
+      • Estrategia SERMICAT:<br>
+        1. Piloto en EESS propia o aliada.<br>
+        2. Alianzas con proveedores solares.<br>
+        3. Financiamiento vía RenovAr / créditos verdes.<br>
+      <a href="https://ypfsolar.com/" target="_blank">YPF Solar</a> • 
+      <a href="https://setecsoluciones.com.ar/" target="_blank">Setec</a> • 
+      <a href="https://www.bbvacib.com/insights/news/energy-transition-in-argentina-challenges-and-opportunities-on-the-road-to-a-sustainable-future/" target="_blank">BBVA CIB</a>
+    </div>
+    <div class="box">
+      <strong>Análisis</strong><br>
+      La evidencia indica que el NOA está en una etapa de consolidación:  
+      - **Oportunidades**: recursos abundantes, proyectos internacionales activos, incentivos estatales.  
+      - **Riesgos**: volatilidad de precios globales, concentración en litio y metales, dependencia de inversión extranjera.  
+      - **Proyección**: integrar minería + energías renovables permite a SERMICAT posicionarse como proveedor logístico y tecnológico en la transición energética.  
+      - **Ventaja competitiva**: ingresar en solar para EESS diversifica ingresos, reduce costos propios y mejora imagen sostenible ante clientes.  
+    </div>
   </div>
 
   <div class="footer">
-    Elaborado por <strong>DANIEL MARTIN CONTRERAS</strong> (3813012805) para 
-    <a href="https://sermicat.com" target="_blank"><strong>SERMICAT</strong></a>
+    Elaborado por <strong>DANIEL MARTÍN CONTRERAS</strong> (3813012805) para 
+    <a href="https://sermicat.com" target="_blank"><b>SERMICAT</b></a> • 
+    <a href="https://Martin3869.github.io/informe-sermicat/" target="_blank">Versión en GitHub Pages</a>
   </div>
 
   <script>
     const commonOptions = {
       responsive: true,
       plugins: {
-        legend: { position: 'bottom', labels: { color: '#f1f1f1', font: { size: 10 } } },
+        legend: { position: 'bottom', labels: { color: '#f1f1f1', font: { size: 9 } } },
         tooltip: {
           callbacks: {
             label: function(context) {
@@ -127,7 +140,6 @@
       }
     };
 
-    // Datos
     const data = {
       general: [487, 187],
       jujuy: [242, 245],
@@ -135,7 +147,6 @@
       mineria: [400, 187]
     };
 
-    // Crear gráficos
     new Chart(document.getElementById('generalChart'), {
       type: 'pie',
       data: { labels: ['Jujuy (487 M)', 'Catamarca (187 M)'], datasets: [{ data: data.general, backgroundColor: ['#4CAF50','#2196F3'] }] },
