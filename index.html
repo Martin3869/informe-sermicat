@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Informe SERMICAT – Exportaciones & Energía</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      margin: 0;
+      padding: 8px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 18px;
+      margin: 6px 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .chart-container {
+      background: #2c2c2c;
+      padding: 6px;
+      border-radius: 6px;
+    }
+    h2 {
+      font-size: 11px;
+      margin: 4px 0;
+      text-align: center;
+    }
+    canvas {
+      max-height: 140px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .box {
+      background: #2c2c2c;
+      padding: 6px;
+      border-radius: 6px;
+      font-size: 11px;
+      line-height: 1.3;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 4px;
+      font-size: 10px;
+      color: #bbb;
+    }
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .summary-grid { grid-template-columns: 1fr; }
+      canvas { max-height: 120px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Informe SERMICAT – Exportaciones NOA & Energía Sustentable (2025)</h1>
+
+  <!-- Gráficos -->
+  <div class="grid">
+    <div class="chart-container"><h2>Jujuy vs Catamarca</h2><canvas id="generalChart"></canvas></div>
+    <div class="chart-container"><h2>Jujuy</h2><canvas id="jujuyChart"></canvas></div>
+    <div class="chart-container"><h2>Catamarca</h2><canvas id="catamarcaChart"></canvas></div>
+    <div class="chart-container"><h2>Minería</h2><canvas id="mineriaChart"></canvas></div>
+  </div>
+
+  <!-- Resúmenes -->
+  <div class="summary-grid">
+    <div class="box">
+      <strong>Triángulo del Litio</strong><br>
+      • Concentra 50–85% de reservas globales.<br>
+      • Jujuy y Catamarca: líderes regionales.<br>
+      • Producción 2025: 130.800 Tn LCE (+75%).<br>
+      • Exportaciones 2030: +US$ 8.700M.<br>
+      • 2032–35: +US$ 11.300M.<br>
+      <a href="https://es.wikipedia.org/wiki/Tri%C3%A1ngulo_del_Litio" target="_blank">Wikipedia</a> • 
+      <a href="https://www.argentina.gob.ar/sites/default/files/informe_litio_junio_2025.pdf" target="_blank">Informe 2025</a> • 
+      <a href="https://cancilleria.gob.ar/userfiles/ut/2024-10-la_mineria_de_litio_en_la_argentina_0.pdf" target="_blank">Cancillería</a> • 
+      <a href="https://www.reuters.com/latam/negocio/MQ4KZCYLY5OOXO54TPKWOAARYE-2025-04-08/" target="_blank">Reuters</a>
+    </div>
+    <div class="box">
+      <strong>Diversificación Energética</strong><br>
+      • EESS: paneles solares → ahorro eléctrico.<br>
+      • Baterías → autonomía en cortes.<br>
+      • Termotanques solares → agua caliente.<br>
+      • Casos: YPF Solar, Parque Cauchari (300MW).<br>
+      • Estrategia SERMICAT:<br>
+        1. Piloto en EESS propia o aliada.<br>
+        2. Alianzas con proveedores solares.<br>
+        3. Financiamiento vía RenovAr / créditos verdes.<br>
+      <a href="https://ypfsolar.com/" target="_blank">YPF Solar</a> • 
+      <a href="https://setecsoluciones.com.ar/" target="_blank">Setec</a> • 
+      <a href="https://www.bbvacib.com/insights/news/energy-transition-in-argentina-challenges-and-opportunities-on-the-road-to-a-sustainable-future/" target="_blank">BBVA CIB</a>
+    </div>
+    <div class="box">
+      <strong>Análisis</strong><br>
+      La evidencia indica que el NOA está en una etapa de consolidación:  
+      - **Oportunidades**: recursos abundantes, proyectos internacionales activos, incentivos estatales.  
+      - **Riesgos**: volatilidad de precios globales, concentración en litio y metales, dependencia de inversión extranjera.  
+      - **Proyección**: integrar minería + energías renovables permite a SERMICAT posicionarse como proveedor logístico y tecnológico en la transición energética.  
+      - **Ventaja competitiva**: ingresar en solar para EESS diversifica ingresos, reduce costos propios y mejora imagen sostenible ante clientes.  
+    </div>
+  </div>
+
+  <div class="footer">
+    Elaborado por <strong>DANIEL MARTÍN CONTRERAS</strong> (3813012805) para 
+    <a href="https://sermicat.com" target="_blank"><b>SERMICAT</b></a> • 
+    <a href="https://Martin3869.github.io/informe-sermicat/" target="_blank">Versión en GitHub Pages</a>
+  </div>
+
+  <script>
+    const commonOptions = {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { color: '#f1f1f1', font: { size: 9 } } },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const total = context.dataset.data.reduce((a, b) => a + b, 0);
+              const value = context.raw;
+              return `${context.label}: US$ ${value} M (${((value / total) * 100).toFixed(1)}%)`;
+            }
+          }
+        }
+      }
+    };
+
+    const data = {
+      general: [487, 187],
+      jujuy: [242, 245],
+      catamarca: [125, 62],
+      mineria: [400, 187]
+    };
+
+    new Chart(document.getElementById('generalChart'), {
+      type: 'pie',
+      data: { labels: ['Jujuy (487 M)', 'Catamarca (187 M)'], datasets: [{ data: data.general, backgroundColor: ['#4CAF50','#2196F3'] }] },
+      options: commonOptions
+    });
+    new Chart(document.getElementById('jujuyChart'), {
+      type: 'pie',
+      data: { labels: ['Litio (242 M)', 'Azúcar (245 M)'], datasets: [{ data: data.jujuy, backgroundColor: ['#FFC107','#FF5722'] }] },
+      options: commonOptions
+    });
+    new Chart(document.getElementById('catamarcaChart'), {
+      type: 'pie',
+      data: { labels: ['Litio (125 M)', 'Oro/Plata (62 M)'], datasets: [{ data: data.catamarca, backgroundColor: ['#9C27B0','#00BCD4'] }] },
+      options: commonOptions
+    });
+    new Chart(document.getElementById('mineriaChart'), {
+      type: 'pie',
+      data: { labels: ['Jujuy minería (≈400 M)', 'Catamarca minería (187 M)'], datasets: [{ data: data.mineria, backgroundColor: ['#8BC34A','#FF9800'] }] },
+      options: commonOptions
+    });
+  </script>
+</body>
+</html>
